@@ -168,9 +168,17 @@ def dis_reader(filename):
     OUTPUTS
     - Filter .dis file as a readable dataframe
     """
-    dis_df = pd.read_csv(str(filename), delimiter=',', skiprows=[3], header=4, skipfooter = 15, parse_dates=[1,2])
-    dis_df= dis_df[dis_df['DQI'] < 4]
-    return dis_df
+    name_list = ['Profile', 'HH', 'MM', 'SS', 'Distance(m)',
+                 'DMG(m)', 'DistEast(m)', 'DistNorth(m)',
+                 'Latitude(deg)', 'Longitude(deg)', 'Depth_1(m)',
+                 'Depth_2(m)', 'Depth_3(m)', 'AvDepth(m)', 'EsDepth(m)',
+                 'uVess(m/s)', 'DirVess(deg)', 'uFlow(m/s)', 'DirFlow(deg)',
+                 'StdDev(m/s)', 'DQI', '#_Valid_Cells', 'Q(m^3/s)',
+                 'Q_Cumul(m^3/s)']
+    df = pd.read_table(filename, delimiter='\s+', comment='%', 
+                       names=name_list, index_col=False)
+    df = df[df['DQI'] < 4]
+    return df
 
 def dis_transect_bearing(disfile):
     """
