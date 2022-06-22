@@ -10,7 +10,7 @@ Next, we have to calculate the discharge, or Qn using information from both the 
 - Use `Qnorm()` with the modified T file dataframe, modified DIS file dataframe, and then your sampling interval
 - Example code (from [test_example_data.py](test_example_data.py))
 
-'''
+```
 import ADP_tools as ADP
 
 dis_file = 'example_data/ELK2206151355.DIS'
@@ -22,6 +22,6 @@ df_t = ADP.t_reader(t_file)
 df_tQ = ADP.tfile_Qest(df_t)
 
 df_Q = ADP.Qnorm(df_tQ,df_dis,5)
-'''
+```
 
 Once you’ve followed all of these steps, you now have a single dataframe that tells you the velocity magnitude (V), ADP_heading, true water direction relative to ADP heading (TWD), the velocity of each depth cell relative to the cross section (V_cs), and the estimated discharge rate for that specific depth cell (Q_est). These tools also construct the dataframe in a way that is easily convertible to an xarray dataframe, where you can separated your profiles by bin depth and profile number to form colorplots of your cross sections.
